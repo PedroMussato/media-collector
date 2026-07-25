@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<p>
+    <a href="/generate_conf_file_main/">Generate conf file from here.</a>
+</p>
+
+<ul class="list-group">
+  <li class="list-group-item active" aria-current="true">My bands</li>
+  <li class="list-group-item">
+    <a href="/create_band/">Create</a>
+    </li>
+  {% for band in bands%}
+  <li class="list-group-item">
+    <a href="/band/{{band.uuid}}">{{band.name}}</a>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

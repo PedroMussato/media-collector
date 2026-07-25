@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Create music{% endblock %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+
+    <h3>Band {{album.band.name}} album {{album.name}}</h3>
+
+    <div>
+        <label class="form-label">Music track:</label>
+        <input name="track" type="number" class="form-control" value="{{music.track}}">
+    </div>
+
+
+    <div>
+        <label class="form-label">Music name:</label>
+        <input name="name" type="text" class="form-control" value="{{music.name}}">
+    </div>
+
+    <div>
+        <label class="form-label">YouTube URL:</label>
+        <input
+            type="url"
+            name="yt_url"
+            class="form-control"
+            placeholder="https://www.youtube.com/watch?v=..."
+            value="{{music.yt_url}}">
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Update</button>
+</form>
+
+<div>
+    If you want to delete this music
+    <a href="/delete_music/{{music.uuid}}/">click here.</a>
+</div>
+
+{% endblock %}

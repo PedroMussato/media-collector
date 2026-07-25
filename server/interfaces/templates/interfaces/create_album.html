@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Create album{% endblock %}
+
+{% block content %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <h3>Band {{band.name}}</h3>
+
+    <div>
+        <label class="form-label">Album name:</label>
+        <input name="name" type="text" class="form-control">
+    </div>
+
+
+    <div>
+        <label class="form-label">Album cover:</label>
+        <input
+            name="cover"
+            type="file"
+            class="form-control"
+            accept="image/*">
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Create</button>
+</form>
+
+{% endblock %}

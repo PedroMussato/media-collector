@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body style="background-color: rgb(50, 50, 50);">
+
+    <style>
+        .form-text {
+            color:white;
+        }
+        .form-control {
+            background-color: rgb(50, 50, 50);
+            color: white;
+        }
+        input[type="text"]:focus {
+            background-color: rgb(50, 50, 50);
+            color: white;
+        }
+    </style>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+        <div class="container-fluid">
+            <div class="navbar-brand">YT-Albums</div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/auth_app/profile/">Profile</a>
+                    </li>
+                    {% endif %}        
+                </ul>
+                <span class="navbar-text">
+            {% if user.is_authenticated %}
+            <a class="navbar-brand" href="/auth_app/logout/">Logout</a>
+            {% else %}
+            <a class="navbar-brand" href="/auth_app/login/">Login</a>
+            {% endif %}
+          </span>
+            </div>
+        </div>
+    </nav>
+      
+
+    {% if responses %}
+    <ul>
+        {% for response in responses %}
+            <li style="color: {% if response.color %}{{ response.color }}{% else %} red {% endif %};"> {% if response.text %}{{response.text}}{% else %}{{response}}{% endif %}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="m-4" style="color: white;">
+        {% block content %}{% endblock %}
+    </div>
+    
+    {% if alert %}
+        <script>
+            alert("{{alert}}")
+        </script>
+    {% endif %}
+
+</body>
+</html>
